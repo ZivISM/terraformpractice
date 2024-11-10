@@ -18,7 +18,8 @@ resource "aws_instance" "netflix_app" {
   ami           = "ami-06b21ccaeff8cd686"
   instance_type = "t2.micro"
   key_name = aws_key_pair.ec2_key.key_name
-
+  user_data = file("./deploy.sh")
+  vpc_security_group_ids = ["sg-0f645a5ecad7135cd"]
   tags = {
     Name = "netflix-app"
     Env = "dev"
@@ -27,6 +28,8 @@ resource "aws_instance" "netflix_app" {
 
 resource "aws_s3_bucket" "netflix-app-bucket" {
   bucket = "netflix-app-bucket-forzivis"
+
+  depends_on = [aws_instance.netflix_app]
 
   tags = {
     name = "My Bucket"
