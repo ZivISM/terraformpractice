@@ -44,7 +44,7 @@ resource "local_file" "ec2_private_key" {
 }
 
   resource "aws_security_group" "netflix_app_sg" {
-  name        = "ziv-netflix-app-sg"   # change <your-name> accordingly
+  name        = "ziv-netflix-app-sg"   
   description = "Allow SSH and HTTP traffic"
 
   ingress {
