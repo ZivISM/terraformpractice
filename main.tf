@@ -25,6 +25,24 @@ resource "aws_instance" "netflix_app" {
   }
 }
 
+resource "aws_s3_bucket" "netflix-app-bucket" {
+  bucket = "netflix-app-bucket-forzivis"
+
+  tags = {
+    name = "My Bucket"
+    Environment = "dev"
+  }
+}
+
+resource "aws_ebs_volume" "netflix-app-volume" {
+  availability_zone = "us-east-1a"
+  size = 5 
+
+  tags = {
+    name = "Hello_world"
+  }
+}
+
 # Generate an EC2 key pair and save the private key locally
 resource "aws_key_pair" "ec2_key" {
   key_name   = "my-ec2-key"  # Name of the key pair in AWS
